@@ -34,7 +34,7 @@ printf "}\n" >> /etc/nginx/sites-enabled/flask_webLogger
 sudo unlink /etc/nginx/sites-enabled/default
 sudo nginx -s reload
 
-# start webserver: 	cd flask_webLogger && gunicorn -w 3 flas_logger:app
+# start webserver: 	cd flask_webLogger && gunicorn -w 3 flask_logger:app
 # reset: 			rm -r flask_webLogger
 #					rm /etc/nginx/sites-enabled/flask_webLogger
 #					rm setup_webserver.sh
