@@ -7,7 +7,7 @@ from flask import jsonify
 # globals
 app = Flask(__name__)
 dir_path = os.path.dirname(os.path.realpath(__file__))
-logfile_path = dir_path + 'flasklogger_access.log'
+logfile_path = dir_path + '/flasklogger_access.log'
 strf_string = '%d.%m.%Y - %H:%M:%S'
 
 @app.route('/')
