@@ -16,13 +16,13 @@ def grab():
         date = datetime.datetime.now().strftime(strf_string)
         try:
             data = {
-                'remote_addr': request.remote_addr,
-                'parsed_proxy_addr': request.environ.get('HTTP_X_FORWARDED_FOR'),
-                'host': request.host,
-                'access_route': request.access_route,
-                'request_headers': request.headers,
-                'url_params': request.args,
-                'request_date': request.date,
+                'remote_addr': str(request.remote_addr),
+                'parsed_proxy_addr': str(request.environ.get('HTTP_X_FORWARDED_FOR')),
+                'host': str(request.host),
+                'access_route': str(request.access_route),
+                'request_headers': str(request.headers),
+                'url_params': str(request.args),
+                'request_date': str(request.date),
             }
         except Exception as e:
             data = {'error': e}
