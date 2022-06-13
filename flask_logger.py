@@ -28,3 +28,22 @@ def grab():
         log_string = f'[{date}]\t{str(data)}\n'
         file.write(log_string)
     return jsonify(data), 200
+
+@app.route('/xss')
+def grab():
+    with open(logfile_path, 'a+') as file:
+        date = datetime.datetime.now().strftime(strf_string)
+        try:
+            data = {
+                'remote_addr': str(request.environ.get('HTTP_X_FORWARDED_FOR')),
+                'attacking_host': str(request.host),
+                'access_route': str(request.access_route),
+                'request_headers': str(request.headers),
+                'url_params': str(request.args),
+                'request_date': str(request.date),
+            }
+        except Exception as e:
+            data = {'error': e}
+        log_string = f'[{date}]\t{str(data)}\n'
+        file.write(log_string)
+    return jsonify(data), 200
