@@ -30,7 +30,7 @@ def grab():
     return jsonify(data), 200
 
 @app.route('/xss')
-def grab():
+def grabXss():
     with open(logfile_path, 'a+') as file:
         date = datetime.datetime.now().strftime(strf_string)
         try:
