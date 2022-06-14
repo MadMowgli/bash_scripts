@@ -1,4 +1,5 @@
 import datetime
+import json
 import os
 from flask import Flask
 from flask import request
@@ -16,16 +17,17 @@ def grab():
         date = datetime.datetime.now().strftime(strf_string)
         try:
             data = {
+                'timestamp': date,
                 'remote_addr': str(request.environ.get('HTTP_X_FORWARDED_FOR')),
                 'attacking_host': str(request.host),
-                'access_route': str(request.access_route),
-                'request_headers': str(request.headers),
-                'url_params': str(request.args),
-                'request_date': str(request.date),
+                'access_route': [x for x in request.access_route],
+                'request_headers': [x for x in request.headers],
+                'url_params': [x for x in request.args]
             }
+            request.headers
         except Exception as e:
             data = {'error': e}
-        log_string = f'[{date}]\t{str(data)}\n'
+        log_string = json.dumps(data)
         file.write(log_string)
     return jsonify(data), 200
 
@@ -35,15 +37,15 @@ def grabXss():
         date = datetime.datetime.now().strftime(strf_string)
         try:
             data = {
+                'timestamp': date,
                 'remote_addr': str(request.environ.get('HTTP_X_FORWARDED_FOR')),
                 'attacking_host': str(request.host),
-                'access_route': str(request.access_route),
-                'request_headers': str(request.headers),
-                'url_params': str(request.args),
-                'request_date': str(request.date),
+                'access_route': [x for x in request.access_route],
+                'request_headers': [x for x in request.headers],
+                'url_params': [x for x in request.args]
             }
         except Exception as e:
             data = {'error': e}
-        log_string = f'[{date}]\t{str(data)}\n'
+        log_string = json.dumps(data)
         file.write(log_string)
     return jsonify(data), 200
