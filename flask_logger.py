@@ -28,7 +28,7 @@ def grab():
         except Exception as e:
             data = {'error': e}
         log_string = json.dumps(data)
-        file.write(log_string)
+        file.write(log_string + '\n')
     return jsonify(data), 200
 
 @app.route('/xss')
@@ -47,5 +47,5 @@ def grabXss():
         except Exception as e:
             data = {'error': e}
         log_string = json.dumps(data)
-        file.write(log_string)
+        file.write(log_string + '\n')
     return jsonify(data), 200
